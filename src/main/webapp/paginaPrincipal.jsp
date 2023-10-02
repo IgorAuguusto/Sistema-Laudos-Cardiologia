@@ -29,25 +29,25 @@
 	        <h1>Sistema de Laudos</h1>
 	        <c:choose>
 	            <c:when test="<%=isMedicoDocente((Medico)session.getAttribute(\"medico\"))%>">
-	                <form  method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
-	                	<input type="submit" value="Atualização dos Laudos">
-	                </form>
+	                <div class="button-link-div">
+	                	<a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/atualizarLaudo.jsp" class="button-link">Atualizar Laudo</a>
+	                </div>
 	            </c:when>
 	             <c:when test="<%=isMedicoResidente((Medico)session.getAttribute(\"medico\"))%>">
-	                <form  method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
-	                	<input type="submit" value="Realização de Exame">
-	                </form>
-	                <form  method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
-	                	<input type="submit" value="Gerar Laudo Exame">
-	                </form>
+	                <div class="button-link-div">
+	                	<a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/realizacaoDeExame.jsp" class="button-link">Realização de Exame</a>
+	                </div>
+	                <div class="button-link-div">
+	                	<a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/gerarLaudo.jsp" class="button-link">Gerar Laudo</a>
+	                </div>
 	            </c:when>
 	            <c:otherwise>
-	                <form  method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
-	                	<input type="submit" value="Solicitação de Exame">
-	                </form>
-	                <form  method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
-	                	<input type="submit" value="Consulta Exame">
-	                </form>
+	                <div class="button-link-div">
+	                	<a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/solicitacaoDeExame.jsp" class="button-link">Solicitação de Exame</a>
+	                </div>
+	                <div class="button-link-div">
+	                <a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/consultaExame.jsp" class="button-link">Consultar Exame</a>
+	                </div>
 	            </c:otherwise>
 	        </c:choose>
 	        <form  method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
