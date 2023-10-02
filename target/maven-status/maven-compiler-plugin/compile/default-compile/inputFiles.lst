@@ -1,0 +1,13 @@
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\controller\Controller.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\entities\MedicoDocente.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\entities\Medico.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\entities\Titulacao.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\logica\Logica.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\dao\MedicoDAO.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\entities\TipoMedico.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\dao\PacienteDao.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\logica\Logout.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\entities\MedicoResidente.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\br\FabricaConexao.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\model\entities\Paciente.java
+C:\Users\igora\eclipse-workspace\SistemasDeLaudosDeCardiologia\src\main\java\sistema\laudo\logica\Login.java

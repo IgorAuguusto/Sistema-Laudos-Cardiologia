@@ -8,9 +8,6 @@
 <title>Sistema de Laudos</title>
 <link rel="icon" href="imagens/icon.png">
 <link rel="stylesheet" href="style.css">
-<c:if test="${not empty requestScope.medicoNaoRegistrado}">
-        <script>alert("Credenciasis Invalidas ou Médico não registrado no sistema");</script>
-</c:if>
 </head>
 <body>
     <div class="center">
@@ -28,6 +25,11 @@
           <label>Senha</label>
         </div>
         <input type="submit" value="Entrar">
+        <c:if test="${not empty requestScope.medicoNaoRegistrado}">
+        	<div id="error_mensagem">
+        		<strong>Credenciais Inválidas</strong>
+        	</div>
+        </c:if>
       </form>
     </div>
 </body>

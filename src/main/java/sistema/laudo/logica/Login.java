@@ -25,7 +25,6 @@ public class Login implements Logica {
 
             if (medico != null) {
                 HttpSession sessao = request.getSession();
-                sessao.setAttribute("status", true);
                 sessao.setAttribute("medico", medico);
                 return "paginaPrincipal.jsp";
             } else {
