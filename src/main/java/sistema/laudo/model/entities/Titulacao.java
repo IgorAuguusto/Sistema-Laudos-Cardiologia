@@ -16,10 +16,6 @@ public enum Titulacao {
     public String getTitulacao() {
         return titulacao;
     }
-   
-    public void setTitulacao(String titulacao) {
-		this.titulacao = titulacao;
-	}
 
     public static Titulacao converterStringParaTitulacao(String string) {
         if (string.isBlank()) {
@@ -36,6 +32,6 @@ public enum Titulacao {
     
     public String toString() {
     	return this.getTitulacao();
-    }
+    }//converterStringParaTitulacao()
     
 }//Titulacao

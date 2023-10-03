@@ -2,11 +2,11 @@ package sistema.laudo.model.entities;
 
 public enum TipoMedico {
 	MEDICO("medico"),
-	MEDICO_DOCENTE("medico-docente"),
+	MEDICO_DOCENTE("medico-docente"), 
 	RESIDENTE("residente");
-	
+
 	private String tipoMedico;
-	
+
 	private TipoMedico(String tipoMedico) {
 		this.tipoMedico = tipoMedico;
 	}
@@ -15,21 +15,17 @@ public enum TipoMedico {
 		return tipoMedico;
 	}
 
-	public void setTipoMedico(String tipoMedico) {
-		this.tipoMedico = tipoMedico;
-	}
-	
-	 public static TipoMedico converterStringParaTipoMedico(String string) {
-	        if (string.isBlank()) {
-	        	return null;
-	        }
-	    	
-	    	for (TipoMedico tipo : TipoMedico.values()) {
-	            if (tipo.getTipoMedico().equalsIgnoreCase(string)) {
-	                return tipo;
-	            }
-	        }
-	        return null;
-	    }
-	 
-}//TipoMedico
+	public static TipoMedico converterStringParaTipoMedico(String string) {
+		if (string.isBlank()) {
+			return null;
+		}
+
+		for (TipoMedico tipo : TipoMedico.values()) {
+			if (tipo.getTipoMedico().equalsIgnoreCase(string)) {
+				return tipo;
+			}
+		}
+		return null;
+	}//converterStringParaTipoMedico()
+
+}// TipoMedico

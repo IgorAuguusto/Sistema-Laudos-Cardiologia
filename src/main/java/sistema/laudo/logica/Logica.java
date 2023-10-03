@@ -7,6 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public interface Logica {
-	public String executa(HttpServletRequest req, 
-			HttpServletResponse resp) throws ServletException, IOException;
+	public String executa(HttpServletRequest request, 
+			HttpServletResponse response) throws ServletException, IOException;
 }
