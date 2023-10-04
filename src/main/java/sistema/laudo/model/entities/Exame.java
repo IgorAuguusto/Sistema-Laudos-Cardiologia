@@ -14,6 +14,8 @@ public class Exame {
 	private byte[] pdf;
 	private LocalDateTime dataRealizacao;
 	
+	private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyy");
+	
 	public String getPacienteCpf() {
 		return pacienteCpf;
 	}
@@ -34,6 +36,10 @@ public class Exame {
 		return status;
 	}
 	
+	public String getStatusStr() {
+		return status.getStatusExame();
+	}
+	
 	public void setStatus(String status) {
 		this.status = StatusExame.converterStringParaStatusExame(status);
 	}
@@ -51,7 +57,6 @@ public class Exame {
 	}
 	
 	public String getDataPedidoStr() {
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyy");
 		return dataPedido.format(dateTimeFormatter);
 	}
 	
@@ -86,6 +91,10 @@ public class Exame {
 	
 	public LocalDateTime getDataRealizacao() {
 		return dataRealizacao;
+	}
+	
+	public String getDataRealizacaoStr() {
+		return dataRealizacao.format(dateTimeFormatter);
 	}
 	
 	public void setDataRealizacao(LocalDateTime dataRealizacao) {

@@ -7,6 +7,7 @@ import org.apache.commons.mail.SimpleEmail;
 import sistema.laudo.model.entities.Exame;
 import sistema.laudo.model.entities.Medico;
 import sistema.laudo.model.entities.Paciente;
+import sistema.laudo.model.entities.TipoExame;
 
 public class EnviarEmail {
 	
@@ -38,10 +39,24 @@ public class EnviarEmail {
 		 var sb = new StringBuilder();
 		 
 		 sb.append("Bom dia, ").append(paciente.getNome()).append("!\n\nSua consulta com o doutor ")
-		 .append(medico.getNome()).append(" foi agendada").append(" para o dia: ").append(exame.getDataPedidoStr())
-		 .append("\n\n").append("Favor seguir as orientações abaixo..").append("\n\n")
-		 .append("Evitar cafeína e alimentos estimulantes nas horas que antecedem o exame.")
-		 .append("\n\nAtenciosamente, ").append("Hospital dos Loucos.");
+		 .append(medico.getNome()).append(", CRM: ").append(medico.getCrm()).append(", foi agendada")
+		 .append(" para o dia: ").append(exame.getDataPedidoStr())
+		 .append("\n\n").append("Favor seguir as orientações abaixo..").append("\n\n");
+		 
+		 if (exame.getTipoExame().equals(TipoExame.ECOCARDIOGRAMA.getTipoExame())) {
+			 sb.append("Vestuário adequado: Use roupas confortáveis e que permitam fácil acesso ao peito, pois ")
+			 .append("será necessário remover a parte superior do vestuário para realizar o exame.")
+			 .append("\n\nEvitar cafeína: Algumas pessoas são sensíveis à cafeína, que pode afetar a frequência ")
+			 .append("cardíaca. Se possível, evite cafeína algumas horas antes do exame.");
+		 }
+		 else {
+			 sb.append("Vestuário adequado: Use roupas que permitam fácil acesso ao peito, pois eletrodos serão ")
+			 .append("colocados na pele para registrar a atividade elétrica do coração.")
+			 .append("\n\nEvitar loções e cremes: Evite aplicar loções, cremes ou óleos na pele do peito no dia do ")
+			 .append("exame, pois isso pode interferir com a aderência dos eletrodos.");
+		 }
+		 
+		 sb.append("\n\nAtenciosamente, ").append("Hospital dos Loucos.");
 		 
 		 return sb.toString();
 	 }//montarMensagemEmail();

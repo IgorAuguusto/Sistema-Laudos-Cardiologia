@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import sistema.laudo.br.FabricaConexao;
 import sistema.laudo.model.entities.Exame;
@@ -67,5 +69,59 @@ public class ExameDao {
 			throw new SQLException("Erro ao procurar paciente", e);
 		}
 	}//procurarExame()
+	
+	public static List<Exame> pesquisarTodosExames() throws SQLException {
+        List<Exame> exames = new ArrayList<>();
+        try (Connection connection = FabricaConexao.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM exames");
+                ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Exame exame = new Exame();
+
+                exame.setPacienteCpf(resultSet.getString("paciente_cpf"));
+                exame.setTipoExame(resultSet.getString("exame"));
+                exame.setStatus(resultSet.getString("status"));
+                exame.setHipotese(resultSet.getString("hipotese"));
+                exame.setDataPedido(resultSet.getTimestamp("data_pedido").toLocalDateTime());
+                exame.setMedicoCrm(resultSet.getString("crm"));
+                exame.setNomeMedico(resultSet.getString("nome_medico"));
+
+                if (resultSet.getBytes("pdf") != null) {
+                    exame.setPdf(resultSet.getBytes("pdf"));
+                }
+                if (resultSet.getTimestamp("data_realizacao") != null) {
+                    exame.setDataRealizacao(resultSet.getTimestamp("data_realizacao").toLocalDateTime());
+                }
+
+                exames.add(exame);
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar todos os exames", e);
+        }
+        return exames;
+    }//pesquisarTodosExames()
+	
+	 public static void atualizarExame(Exame exame) throws SQLException {
+	        try (Connection connection = FabricaConexao.getConnection();
+	                PreparedStatement preparedStatement = connection.prepareStatement(
+	                        "UPDATE exames SET exame=?, status=?, hipotese=?, data_pedido=?, nome_medico=? WHERE paciente_cpf=? AND crm=?")) {
+
+	            preparedStatement.setString(1, exame.getTipoExame());
+	            preparedStatement.setString(2, exame.getStatus().getStatusExame());
+	            preparedStatement.setString(3, exame.getHipotese());
+	            preparedStatement.setTimestamp(4, Timestamp.valueOf(exame.getDataPedido()));
+	            preparedStatement.setString(5, exame.getNomeMedico());
+	            preparedStatement.setString(6, exame.getPacienteCpf());
+	            preparedStatement.setString(7, exame.getMedicoCrm());
+
+	            int rowsAffected = preparedStatement.executeUpdate();
+	            if (rowsAffected == 0) {
+	                throw new SQLException("Nenhum registro atualizado. Verifique o CPF e o CRM fornecidos.");
+	            }
+	        } catch (SQLException e) {
+	            throw new SQLException("Erro ao atualizar exame", e);
+	        }
+	    }//atualizarExame()
 
 }//ExameDao
