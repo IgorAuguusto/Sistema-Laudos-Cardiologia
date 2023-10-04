@@ -37,10 +37,11 @@ public class EnviarEmail {
 	 public static String montarMensagemEmail(Paciente paciente, Medico medico, Exame exame) {
 		 var sb = new StringBuilder();
 		 
-		 sb.append("Bom dia ").append(paciente.getNome()).append(" sua consulta com o doutor: ")
-		 .append(medico.getNome()).append("foi agendada").append("para o dia: ").append(exame.getDataPedidoStr())
-		 .append("\n\n").append("Favor seguir as orientações abaixo").append("\n\n")
-		 .append("Evitar cafeína e alimentos estimulantes nas horas que antecedem o exame.");
+		 sb.append("Bom dia, ").append(paciente.getNome()).append("!\n\nSua consulta com o doutor ")
+		 .append(medico.getNome()).append(" foi agendada").append(" para o dia: ").append(exame.getDataPedidoStr())
+		 .append("\n\n").append("Favor seguir as orientações abaixo..").append("\n\n")
+		 .append("Evitar cafeína e alimentos estimulantes nas horas que antecedem o exame.")
+		 .append("\n\nAtenciosamente, ").append("Hospital dos Loucos.");
 		 
 		 return sb.toString();
 	 }//montarMensagemEmail();
