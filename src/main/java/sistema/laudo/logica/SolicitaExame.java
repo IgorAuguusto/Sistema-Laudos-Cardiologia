@@ -54,7 +54,8 @@ public class SolicitaExame implements Logica {
 			ExameDao.inserirExame(exame);
 			
 			String mensagemEmail = EnviarEmail.montarMensagemEmail(paciente, medico, exame);
-			EnviarEmail.enviarEmail(paciente.geteMail(), mensagemEmail);
+			String assunto = "Consulta marcada";
+			EnviarEmail.enviarEmail(paciente.geteMail(), assunto, mensagemEmail);
 			
 			request.setAttribute("consultaMarcada", true);
 			

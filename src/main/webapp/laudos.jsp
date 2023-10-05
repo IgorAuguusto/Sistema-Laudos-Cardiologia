@@ -2,24 +2,25 @@
 <%@ page import="sistema.laudo.model.dao.ExameDao"%>
 <%@ page import="sistema.laudo.model.entities.Exame"%>
 <%@ page import="sistema.laudo.model.entities.StatusExame"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="autenticacaoResidente.jsp" %>
+<%@ include file="autenticacaoResidente.jsp"%>
 
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Sistema de Laudos</title>
 <link rel="icon" href="imagens/icon.png">
-<link rel="stylesheet" href="styleRealizacaoExame.css">
+<link rel="stylesheet" href="styleLaudos.css">
 </head>
 <body>
 
-	
+
 	<c:set var="exameList" value="${ExameDao.pesquisarTodosExames()}" />
 
 	<c:set var="exameListFiltrada"
-		value="${exameList.stream().filter(e -> e.getStatusStr().equals(StatusExame.AGUARDANDO_EXAME.getStatusExame())).toList()}" />
+		value="${exameList.stream().filter(e -> e.getStatusStr().equals(StatusExame.AGUARDANDO_LAUDO.getStatusExame())).toList()}" />
 	<div id="conteiner-principal">
 		<table border="1">
 			<thead>
@@ -32,6 +33,7 @@
 					<th>Data do Pedido</th>
 					<th>Médico CRM</th>
 					<th>Nome do Médico</th>
+					<th></th>
 					<th></th>
 				</tr>
 			</thead>
@@ -48,10 +50,21 @@
 						<td>${exame.nomeMedico}</td>
 						<td>
 							<form method="post"
+								action="Controller"
+								target="_blank">
+								<input type="hidden" name="examePdf" value="${exame.pdf}" /> 
+								<input type="hidden" value="VisualizarPDF" name="logica" />
+								<input class="gerar-pdf-button" type="submit" value="Visualizar PDF" name="logica" />
+								
+							</form>
+						</td>
+						<td>
+							<form method="post"
 								action="Controller">
-								<input type="hidden" value="RealizarExame" name="logica">
-								<input type="hidden" name="examePacienteCpf" value="${exame.pacienteCpf}" /> 
-								<input type="submit" value="Realizar Exame"/>
+								<input type="hidden" name="GerarLaudo" value="${exame.id}" /> 
+								<div id="conteiner-laudo">
+									<a id="gera-laudo" href="gerarLaudo.jsp" class="">Gerar Laudo</a>
+								</div>
 							</form>
 						</td>
 					</tr>

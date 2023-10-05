@@ -11,11 +11,11 @@ import sistema.laudo.model.entities.TipoExame;
 
 public class EnviarEmail {
 	
-	 public static void enviarEmail(String emailPara, String mensagem) {
+	 public static void enviarEmail(String emailPara, String assunto,String mensagem) {
 	        String seuEmail = "medicopestedoidao@gmail.com"; 
 	        String suaSenha = "vike qmhn hcqr glte"; 
 	        String hostName = "smtp.gmail.com"; 
-	        String assunto = "Consulta marcada";
+	        
 	        
 	        SimpleEmail email = new SimpleEmail();
 	        email.setHostName(hostName);

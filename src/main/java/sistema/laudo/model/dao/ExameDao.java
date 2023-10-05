@@ -44,6 +44,7 @@ public class ExameDao {
 				if (resultSet.next()) {
 					Exame exame = new Exame();
 					
+					exame.setId(resultSet.getInt("id"));
 					exame.setPacienteCpf(resultSet.getString("paciente_cpf"));
 					exame.setTipoExame(resultSet.getString("exame"));
 					exame.setStatus(resultSet.getString("status"));
@@ -79,6 +80,7 @@ public class ExameDao {
             while (resultSet.next()) {
                 Exame exame = new Exame();
 
+                exame.setId(resultSet.getInt("id"));
                 exame.setPacienteCpf(resultSet.getString("paciente_cpf"));
                 exame.setTipoExame(resultSet.getString("exame"));
                 exame.setStatus(resultSet.getString("status"));
@@ -102,26 +104,32 @@ public class ExameDao {
         return exames;
     }//pesquisarTodosExames()
 	
-	 public static void atualizarExame(Exame exame) throws SQLException {
-	        try (Connection connection = FabricaConexao.getConnection();
-	                PreparedStatement preparedStatement = connection.prepareStatement(
-	                        "UPDATE exames SET exame=?, status=?, hipotese=?, data_pedido=?, nome_medico=? WHERE paciente_cpf=? AND crm=?")) {
+	public static void atualizarExame(Exame exame) throws SQLException {
+	    try (Connection connection = FabricaConexao.getConnection();
+	            PreparedStatement preparedStatement = connection.prepareStatement(
+	                    "UPDATE exames SET paciente_cpf=?, exame=?, status=?, hipotese=?, data_pedido=?, crm=?, nome_medico=?, pdf=?, data_realizacao=? WHERE id=?")) {
 
-	            preparedStatement.setString(1, exame.getTipoExame());
-	            preparedStatement.setString(2, exame.getStatus().getStatusExame());
-	            preparedStatement.setString(3, exame.getHipotese());
-	            preparedStatement.setTimestamp(4, Timestamp.valueOf(exame.getDataPedido()));
-	            preparedStatement.setString(5, exame.getNomeMedico());
-	            preparedStatement.setString(6, exame.getPacienteCpf());
-	            preparedStatement.setString(7, exame.getMedicoCrm());
+	        preparedStatement.setString(1, exame.getPacienteCpf());
+	        preparedStatement.setString(2, exame.getTipoExame());
+	        preparedStatement.setString(3, exame.getStatus().getStatusExame());
+	        preparedStatement.setString(4, exame.getHipotese());
+	        preparedStatement.setTimestamp(5, Timestamp.valueOf(exame.getDataPedido()));
+	        preparedStatement.setString(6, exame.getMedicoCrm());
+	        preparedStatement.setString(7, exame.getNomeMedico());
+	        preparedStatement.setBytes(8, exame.getPdf());
 
-	            int rowsAffected = preparedStatement.executeUpdate();
-	            if (rowsAffected == 0) {
-	                throw new SQLException("Nenhum registro atualizado. Verifique o CPF e o CRM fornecidos.");
-	            }
-	        } catch (SQLException e) {
-	            throw new SQLException("Erro ao atualizar exame", e);
+	        if (exame.getDataRealizacao() != null) {
+	            preparedStatement.setTimestamp(9, Timestamp.valueOf(exame.getDataRealizacao()));
+	        } else {
+	            preparedStatement.setTimestamp(9, null);
 	        }
-	    }//atualizarExame()
 
+	        preparedStatement.setInt(10, exame.getId());
+
+	        preparedStatement.executeUpdate();
+	    } catch (SQLException e) {
+	        throw new SQLException("Erro ao atualizar exame", e);
+	    }
+	}//atualizarExame
+	
 }//ExameDao

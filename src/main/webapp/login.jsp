@@ -12,7 +12,7 @@
 <body>
     <div class="center">
       <h1>Sistema de Laudos</h1>
-	  <form method="post" action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
+	  <form method="post" action="Controller">
         <input type="hidden" value="Login" name="logica">
         <div class="txt_field">
            <input type="text" name="crm" required>

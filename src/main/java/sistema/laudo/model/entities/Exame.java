@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Exame {
+	private Integer id;
 	private String pacienteCpf;
 	private TipoExame tipoExame;
 	private StatusExame status;
@@ -16,6 +17,14 @@ public class Exame {
 	
 	private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyy");
 	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getPacienteCpf() {
 		return pacienteCpf;
 	}

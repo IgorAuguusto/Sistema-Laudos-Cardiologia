@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="autenticacaoMedico.jsp"%>
 
 <!DOCTYPE html>
@@ -47,11 +46,11 @@
 					Outras arritmias cardíacas</option>
 				<option value="I42 - Cardiomiopatias">I42 - Cardiomiopatias</option>
 			</select> <input type="submit" value="Solicitar exame">
+			
 			<div class="button-link-div">
-				<a
-					href="http://localhost:8080/SistemasDeLaudosDeCardiologia/paginaPrincipal.jsp"
-					class="button-link">Voltar</a>
+				<a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/paginaPrincipal.jsp" class="button-link">Voltar</a>
 			</div>
+			
 			<c:if test="${not empty requestScope.pacientePossuiExame}">
 				<div id="error_mensagem">
 					<strong>O paciente já possui o exame selecionado</strong>

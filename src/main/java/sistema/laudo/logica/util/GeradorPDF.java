@@ -14,7 +14,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 
-import sistema.laudo.model.dao.ExameDao;
+import jakarta.servlet.ServletContext;
 import sistema.laudo.model.entities.Exame;
 import sistema.laudo.model.entities.Medico;
 import sistema.laudo.model.entities.StatusExame;
@@ -24,9 +24,9 @@ import sistema.laudo.model.entities.TipoExame;
 
 public class GeradorPDF {
 	
-	private static final String CAMINHO_IMAGENS_EXAME = "imagens/exames/";
+	private static final String CAMINHO_IMAGENS_EXAME = "/imagens/exames/";
 	
-	public static void gerarPDF(Exame exame, Medico medico) throws SQLException  {
+	public static void gerarPDF(Exame exame, Medico medico,  ServletContext context) throws SQLException  {
 		
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 	    PdfWriter pdfWriter = new PdfWriter(byteArrayOutputStream);
@@ -45,15 +45,20 @@ public class GeradorPDF {
 	    document.add(new Paragraph(String.format("Data agendamendo: %s", exame.getDataPedidoStr())));
 	    document.add(new Paragraph(String.format("Exame Realizado em: %s", exame.getDataRealizacaoStr())));
 	    
+	    
 	    String pastaImagem = exame.getTipoExame().equals(TipoExame.ECOCARDIOGRAMA.getTipoExame())
-	    		            ? "ecocardiograma/" : "/eletrocardiograma/";
+	    		            ? "ecocardiograma/" : "eletrocardiograma/";
 	    int numeroImagem = gerarNumero(pastaImagem.equals("ecocardiograma") ? 10 : 9);
 	    
-	    String camianhoAbsolutoImagens = String.format("%s%s%d.jpeg", CAMINHO_IMAGENS_EXAME, pastaImagem, numeroImagem);
+	    String caminhoRelativoImagens = String.format("%s%s%d.jpeg", CAMINHO_IMAGENS_EXAME, pastaImagem, numeroImagem);
+
+	    String contextoPath = context.getRealPath("/");
+	    
+	    String caminhoAbsolutoImagens = String.format("%s%S",  contextoPath, caminhoRelativoImagens);
 	    
 	    ImageData imageData;
 		try {
-			imageData = ImageDataFactory.create(camianhoAbsolutoImagens);
+			imageData = ImageDataFactory.create(caminhoAbsolutoImagens);
 			Image imagem = new Image(imageData);
 			document.add(imagem);
 		} catch (MalformedURLException e) {

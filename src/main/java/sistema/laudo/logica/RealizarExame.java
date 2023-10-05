@@ -2,14 +2,15 @@ package sistema.laudo.logica;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import sistema.laudo.logica.util.GeradorPDF;
 import sistema.laudo.model.dao.ExameDao;
 import sistema.laudo.model.entities.Exame;
-import sistema.laudo.model.entities.StatusExame;
+import sistema.laudo.model.entities.Medico;
 
 public class RealizarExame implements Logica {
 
@@ -18,15 +19,20 @@ public class RealizarExame implements Logica {
 			throws ServletException, IOException {
 			
 		try {
-			List<Exame> exameList = ExameDao.pesquisarTodosExames();
-			exameList = exameList.stream().filter((e) -> e.getStatusStr() != StatusExame.LAUDO_REALIZADO.getStatusExame()).toList();
 			
+			String pacienteCpf = request.getParameter("examePacienteCpf").trim();
+			Exame exame = ExameDao.procurarExame(pacienteCpf);
+			HttpSession session = request.getSession(false);
+			Medico medico = (Medico) session.getAttribute("medico");		
+			
+			GeradorPDF.gerarPDF(exame, medico, request.getServletContext());
+			ExameDao.atualizarExame(exame);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return "realizacaoDeExame.jsp";
 	}//executa()
 
 }//RealizarExame
