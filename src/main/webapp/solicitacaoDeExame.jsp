@@ -14,7 +14,7 @@
 	<div class="center">
 		<h1>Solicitar Exame</h1>
 		<form method="post"
-			action="http://localhost:8080/SistemasDeLaudosDeCardiologia/Controller">
+			action="Controller">
 			<input type="hidden" value="SolicitaExame" name="logica">
 			<div class="txt_field">
 				<input type="text" name="paciente" required> <span></span> <label>Informe

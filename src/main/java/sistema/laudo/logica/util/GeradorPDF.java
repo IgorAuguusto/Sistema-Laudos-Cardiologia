@@ -77,5 +77,6 @@ public class GeradorPDF {
 	        int numeroAleatorio = random.nextInt(maximo) + 1;
 	        return numeroAleatorio;
 	}//gerarNumero()
+
 	 
 }//GeradorPDF

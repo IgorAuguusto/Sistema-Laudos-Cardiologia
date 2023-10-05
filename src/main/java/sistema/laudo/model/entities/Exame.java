@@ -15,7 +15,8 @@ public class Exame {
 	private byte[] pdf;
 	private LocalDateTime dataRealizacao;
 	
-	private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyy");
+	private static DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyy");
+	private static DateTimeFormatter dataHora = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm");
 	
 	public Integer getId() {
 		return id;
@@ -66,7 +67,7 @@ public class Exame {
 	}
 	
 	public String getDataPedidoStr() {
-		return dataPedido.format(dateTimeFormatter);
+		return dataPedido.format(data);
 	}
 	
 	
@@ -103,7 +104,7 @@ public class Exame {
 	}
 	
 	public String getDataRealizacaoStr() {
-		return dataRealizacao.format(dateTimeFormatter);
+		return dataRealizacao.format(dataHora);
 	}
 	
 	public void setDataRealizacao(LocalDateTime dataRealizacao) {

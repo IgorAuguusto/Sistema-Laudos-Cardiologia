@@ -49,9 +49,7 @@
 						<td>${exame.medicoCrm}</td>
 						<td>${exame.nomeMedico}</td>
 						<td>
-							<form method="post"
-								action="Controller"
-								target="_blank">
+							<form method="post" action="Controller" target="_blank">
 								<input type="hidden" name="examePdf" value="${exame.pdf}" /> 
 								<input type="hidden" value="VisualizarPDF" name="logica" />
 								<input class="gerar-pdf-button" type="submit" value="Visualizar PDF" name="logica" />
@@ -59,11 +57,11 @@
 							</form>
 						</td>
 						<td>
-							<form method="post"
-								action="Controller">
-								<input type="hidden" name="GerarLaudo" value="${exame.id}" /> 
+							<form method="post" action="Controller">
 								<div id="conteiner-laudo">
-									<a id="gera-laudo" href="gerarLaudo.jsp" class="">Gerar Laudo</a>
+	                                 <input type="hidden" name="exameCpf" value="${exame.pacienteCpf}" /> 
+									<input type="hidden" value="GerarLaudo" name="logica" />
+									<input class="gerar-pdf-button" type="submit" value="Gerar Laudo" name="logica" />	
 								</div>
 							</form>
 						</td>
