@@ -5,7 +5,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Sistema de Laudos</title>
+	<link rel="icon" href="imagens/icon.png">
 </head>
 <body>
 	<c:if test="${ empty sessionScope.medico }">

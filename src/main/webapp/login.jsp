@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Sistema de Laudos</title>
-<link rel="icon" href="imagens/icon.png">
-<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="imagens/icon.png">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="center">
@@ -26,8 +26,8 @@
         </div>
         <input type="submit" value="Entrar">
         <c:if test="${not empty requestScope.medicoNaoRegistrado}">
-        	<div id="error_mensagem">
-        		<strong>Credenciais Inválidas</strong>
+        	<div class="container_alert">
+        		<p class="error_mensagem"><strong>Credenciais Inválidas</strong></p>
         	</div>
         </c:if>
       </form>

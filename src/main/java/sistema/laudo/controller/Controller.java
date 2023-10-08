@@ -25,9 +25,11 @@ public class Controller extends HttpServlet {
 
             // Executa a lógica e obtém a URL resultante
             String url = logica.executa(request, response);
-
-            // Redireciona para a página resultante
-            request.getRequestDispatcher(url).forward(request, response);
+            
+            if (url != null) {
+            	// Redireciona para a página resultante
+                request.getRequestDispatcher(url).forward(request, response);
+            }
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {

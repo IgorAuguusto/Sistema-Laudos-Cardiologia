@@ -6,9 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sistema de Laudos</title>
-<link rel="icon" href="imagens/icon.png">
-<link rel="stylesheet" href="styleSolicitacaoExame.css">
+	<link rel="stylesheet" href="styleSolicitacaoExame.css">
 </head>
 <body>
 	<div class="center">
@@ -52,18 +50,18 @@
 			</div>
 			
 			<c:if test="${not empty requestScope.pacientePossuiExame}">
-				<div id="error_mensagem">
-					<strong>O paciente já possui o exame selecionado</strong>
+				<div class="container_alert">
+					<p class="error_mensagem"><strong>O paciente já possui o exame selecionado</strong></p>
 				</div>
 			</c:if>
 			<c:if test="${not empty requestScope.pacienteNaoExiste}">
-				<div id="error_mensagem">
-					<strong>Paciente não encontrado no sistema</strong>
+				<div class="container_alert">
+					<p class="error_mensagem"><strong>Paciente não encontrado no sistema</strong></p>
 				</div>
 			</c:if>
 			<c:if test="${not empty requestScope.consultaMarcada}">
-				<div id="error_mensagem">
-					<strong>Consulta marcada com sucesso</strong>
+				<div class="container_alert">
+					<p class="success_mensagem"><strong>Consulta marcada com sucesso</strong></p>
 				</div>
 			</c:if>
 		</form>

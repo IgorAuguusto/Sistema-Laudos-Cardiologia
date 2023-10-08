@@ -69,37 +69,32 @@ input[type="submit"]:hover {
   background-color: #cd5c5c;
 }
 
+input.gerar_laudo[type="submit"] {
+ 	background-color: #22566c;
+    
+}
+
+input[type="submit"].gerar_laudo:hover {
+ 	background-color: #1b475a;
+}
+
 .button-link-div {
 	padding: 0.5em;
 	display: flex;
     align-self: center;
 }
 
-#conteiner-principal{
+#conteiner_principal{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
     gap: 0.5em;
 }
 
-#conteiner-laudo {
+#conteiner_laudo {
 	padding: 0.5em;
 	display: flex;
     align-self: center;
-}
-
-#gera-laudo {
- 	background-color: #22566c;
-    color: #fff;
-    border: none;
-    text-decoration: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 0.7em;
-}
-
-#gera-laudo:hover {
- 	background-color: #1b475a;
 }
 
 a.button-link {

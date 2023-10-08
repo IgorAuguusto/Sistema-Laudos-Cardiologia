@@ -1,25 +1,22 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@ page import="sistema.laudo.model.dao.ExameDao"%>
 <%@ page import="sistema.laudo.model.entities.Exame"%>
 <%@ page import="sistema.laudo.model.entities.StatusExame"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="autenticacaoResidente.jsp" %>
 
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Sistema de Laudos</title>
-<link rel="icon" href="imagens/icon.png">
-<link rel="stylesheet" href="styleRealizacaoExame.css">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styleRealizacaoExame.css">
 </head>
 <body>
 
 	
 	<c:set var="exameList" value="${ExameDao.pesquisarTodosExames()}" />
 
-	<c:set var="exameListFiltrada"
-		value="${exameList.stream().filter(e -> e.getStatusStr().equals(StatusExame.AGUARDANDO_EXAME.getStatusExame())).toList()}" />
+	<c:set var="exameListFiltrada" value="${exameList.stream().filter(e -> e.getStatusStr().equals(StatusExame.AGUARDANDO_EXAME.getStatusExame())).toList()}" />
 	<div id="conteiner-principal">
 		<table border="1">
 			<thead>

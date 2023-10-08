@@ -125,10 +125,24 @@ input.save[type="submit"]:hover {
 }
 
 
-#error_mensagem {
+.container_alert {
 	text-align: center;
 	margin-top: 0.5em;
 }
+
+.container_descricao{
+	overflow-y: auto;
+	max-width: 600px;
+    height: 25vh;
+    margin-bottom: 0.7em;
+    background-color: white;
+    border-radius: 0.4em;
+}
+
+.error_mensagem {
+	color: darkred;
+}
+
 
 .button_link_div{
 	padding: 0.5em;

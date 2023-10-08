@@ -36,14 +36,11 @@ public class GeradorPDF {
 	    LocalDateTime dataRealizacao = LocalDateTime.now();
 	    exame.setDataRealizacao(dataRealizacao);
 	    
-	    document.add(new Paragraph(String.format("Medico: %s", medico.getNome())));
-	    document.add(new Paragraph(String.format("CRM: %s", medico.getCrm())));
+	    document.add(new Paragraph(String.format("Medico: %s CRM: %s", medico.getNome(), medico.getCrm())));
 	    
 	    document.add(new Paragraph(String.format("Paciente CPF: %s", exame.getPacienteCpf())));
-	    document.add(new Paragraph(String.format("Tipo do Exame: %s", exame.getTipoExame())));
-	    document.add(new Paragraph(String.format("Hipótese: %s", exame.getHipotese())));
-	    document.add(new Paragraph(String.format("Data agendamendo: %s", exame.getDataPedidoStr())));
-	    document.add(new Paragraph(String.format("Exame Realizado em: %s", exame.getDataRealizacaoStr())));
+	    document.add(new Paragraph(String.format("Tipo do Exame: %s Hipótese: %s", exame.getTipoExame(), exame.getHipotese())));
+	    document.add(new Paragraph(String.format("Data Prevista: %s Exame Realizado em: %s", exame.getDataPedidoStr(), exame.getDataRealizacao())));
 	    
 	    
 	    String pastaImagem = exame.getTipoExame().equals(TipoExame.ECOCARDIOGRAMA.getTipoExame())

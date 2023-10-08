@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="sistema.laudo.model.entities.Medico"%>
-<%@page import="sistema.laudo.model.entities.MedicoDocente"%>
-<%@page import="sistema.laudo.model.entities.MedicoResidente"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="sistema.laudo.model.entities.Medico"%>
+<%@ page import="sistema.laudo.model.entities.MedicoDocente"%>
+<%@ page import="sistema.laudo.model.entities.MedicoResidente"%>
 <%@ include file="autenticacao.jsp" %>
 
 <%! 
@@ -19,7 +18,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
 </head>
 <body>
 	 <c:if test="<%=isSubMedico((Medico)session.getAttribute(\"medico\"))%>">

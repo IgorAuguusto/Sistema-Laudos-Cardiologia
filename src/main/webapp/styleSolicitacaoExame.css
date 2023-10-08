@@ -111,9 +111,17 @@ input[type="submit"]:hover {
   transition: .5s;
 }
 
-#error_mensagem {
+.container_alert {
 	text-align: center;
 	margin-top: 0.5em;
+}
+
+.error_mensagem {
+	color: darkred;
+}
+
+.success_mensagem {
+	color: green;
 }
 
 .button-link-div {

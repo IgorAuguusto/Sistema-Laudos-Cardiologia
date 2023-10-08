@@ -1,7 +1,7 @@
-<%@page import="sistema.laudo.model.entities.MedicoResidente"%>
-<%@page import="sistema.laudo.model.entities.MedicoDocente"%>
-<%@page import="sistema.laudo.model.entities.Medico"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="sistema.laudo.model.entities.MedicoResidente"%>
+<%@ page import="sistema.laudo.model.entities.MedicoDocente"%>
+<%@ page import="sistema.laudo.model.entities.Medico"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="autenticacao.jsp" %>
 
@@ -21,9 +21,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sistema de Laudos</title>
-<link rel="icon" href="imagens/icon.png">
-<link rel="stylesheet" href="stylePaginaPrincipal.css">
+	<link rel="stylesheet" href="stylePaginaPrincipal.css">
 </head>
 <body>
 	 <div class="center">
@@ -31,7 +29,7 @@
 	        <c:choose>
 	            <c:when test="<%=isMedicoDocente((Medico)session.getAttribute(\"medico\"))%>">
 	                <div class="button-link-div">
-	                	<a href="atualizarLaudo.jsp" class="button-link">Atualizar Laudo</a>
+	                	<a href="revisarLaudos.jsp" class="button-link">Revisar Laudos</a>
 	                </div>
 	            </c:when>
 	             <c:when test="<%=isMedicoResidente((Medico)session.getAttribute(\"medico\"))%>">

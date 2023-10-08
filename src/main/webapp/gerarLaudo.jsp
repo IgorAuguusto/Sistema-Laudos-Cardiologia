@@ -1,15 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="autenticacaoResidente.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Sistema de Laudos</title>
-<link rel="icon" href="imagens/icon.png">
-<link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -22,10 +19,10 @@
 				<span><strong> Paciente CPF: </strong> ${exame.pacienteCpf}</span>
 				<span><strong>Tipo: </strong> ${exame.tipoExame}</span>
 			</p>
-			<p class="paragraph">
-				<div><strong>Hipótese: </strong>${exame.hipotese}</div>
-				<div><strong>Realizado em: </strong>${exame.getDataRealizacaoStr()}</div>
-			</p>
+			
+			<div><span><strong>Hipótese: </strong>${exame.hipotese}</span></div>
+			<span><strong>Realizado em: </strong>${exame.getDataRealizacaoStr()}</span>
+			
 			<p class="paragraph">
 				<span><strong>Médico Responsável: </strong>${exame.nomeMedico}</span>
 				<span><strong>CRM: </strong>${exame.medicoCrm}</span>
