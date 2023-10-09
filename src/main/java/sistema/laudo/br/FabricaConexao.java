@@ -19,6 +19,6 @@ public class FabricaConexao {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}//getConnection()
 
 }//FabricaConexao

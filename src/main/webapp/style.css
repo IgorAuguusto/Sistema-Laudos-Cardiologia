@@ -31,6 +31,10 @@ body{
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
 
+.consulta {
+	height: 370px;
+}
+
 .center_geraLaudo {
   height: 620px;
   width: 600px;

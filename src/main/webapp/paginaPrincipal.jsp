@@ -45,7 +45,7 @@
 	                	<a href="solicitacaoDeExame.jsp" class="button-link">Solicitação de Exame</a>
 	                </div>
 	                <div class="button-link-div">
-	                <a href="consultaExame.jsp" class="button-link">Consultar Exame</a>
+	                <a href="consulta.jsp" class="button-link">Consulta</a>
 	                </div>
 	            </c:otherwise>
 	        </c:choose>

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import sistema.laudo.br.FabricaConexao;
 import sistema.laudo.model.entities.Paciente;
 
-public class PacienteDao {
+public class PacienteDAO {
 	
 	public static Paciente procurarPaciente(String cpf) throws SQLException {
 	    try (Connection connection = FabricaConexao.getConnection();

@@ -5,14 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="styleSolicitacaoExame.css">
 </head>
 <body>
 	<div class="center">
 		<h1>Solicitar Exame</h1>
-		<form method="post"
-			action="Controller">
+		<form method="post" action="Controller">
 			<input type="hidden" value="SolicitaExame" name="logica">
 			<div class="txt_field">
 				<input type="text" name="paciente" required> <span></span> <label>Informe
@@ -46,7 +45,7 @@
 			</select> <input type="submit" value="Solicitar exame">
 			
 			<div class="button-link-div">
-				<a href="http://localhost:8080/SistemasDeLaudosDeCardiologia/paginaPrincipal.jsp" class="button-link">Voltar</a>
+				<a href="paginaPrincipal.jsp" class="button-link">Voltar</a>
 			</div>
 			
 			<c:if test="${not empty requestScope.pacientePossuiExame}">

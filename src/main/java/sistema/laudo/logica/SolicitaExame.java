@@ -3,6 +3,7 @@ package sistema.laudo.logica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import sistema.laudo.logica.util.EnviarEmail;
 import sistema.laudo.model.dao.ExameDao;
-import sistema.laudo.model.dao.PacienteDao;
+import sistema.laudo.model.dao.PacienteDAO;
 import sistema.laudo.model.entities.Exame;
 import sistema.laudo.model.entities.Medico;
 import sistema.laudo.model.entities.Paciente;
@@ -23,21 +24,23 @@ public class SolicitaExame implements Logica {
 		String url = "solicitacaoDeExame.jsp";
 		try {
 			String cpf = request.getParameter("paciente");
-			Exame exame = ExameDao.procurarExame(cpf);
+			List<Exame> exameList = ExameDao.pesquisarTodosExames().stream().filter((e) -> e.getPacienteCpf().equals(cpf)).toList();
 			
-			if (exame != null && exame.getTipoExame().equals(request.getParameter("exame")) && exame.getStatus().equals(StatusExame.AGUARDANDO_EXAME)) {
-				request.setAttribute("pacientePossuiExame", true);
-				return url;
+			for (Exame exame : exameList) {
+				if (exame != null && exame.getTipoExame().equals(request.getParameter("exame")) && exame.getStatus().equals(StatusExame.AGUARDANDO_EXAME)) {
+					request.setAttribute("pacientePossuiExame", true);
+					return url;
+				}
 			}
 			
-			Paciente paciente = PacienteDao.procurarPaciente(cpf);
+			Paciente paciente = PacienteDAO.procurarPaciente(cpf);
 			
 			if (paciente == null) {
 				request.setAttribute("pacienteNaoExiste", true);
 				return url;
 			}
 			
-			exame = new Exame();
+			Exame exame = new Exame();
 			
 			exame.setPacienteCpf(paciente.getCpf());
 			exame.setTipoExame(request.getParameter("exame"));

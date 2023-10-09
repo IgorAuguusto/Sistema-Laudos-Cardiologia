@@ -93,7 +93,7 @@ public class LaudoDAO {
             preparedStatement.setString(3, laudo.getDescricao());
             preparedStatement.setString(4, laudo.getConclusao());
             preparedStatement.setString(5, laudo.getStatusStr());
-            preparedStatement.setInt(6, laudo.getId()); // Assume que há um campo "id" na tabela
+            preparedStatement.setInt(6, laudo.getId()); 
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
