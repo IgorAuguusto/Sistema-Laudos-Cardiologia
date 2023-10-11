@@ -60,7 +60,7 @@ public class Login implements Logica {
 	private List<Exame> examesCancelados() throws SQLException {
 		List<Exame> exameList = ExameDao.pesquisarTodosExames();
 		LocalDateTime dataAtual = LocalDateTime.now();
-		exameList = exameList.stream().filter((e) -> e.getDataPedido().isAfter(dataAtual)).toList();
+		exameList = exameList.stream().filter((e) -> e.getDataPedido().isBefore(dataAtual)).toList();
 		exameList = exameList.stream().filter((e) -> e.getStatus().equals(StatusExame.AGUARDANDO_EXAME)).toList();
 		exameList.forEach((e) -> e.setStatus(StatusExame.EXAME_CANCELADO.getStatusExame()));
 		exameList.forEach((e) -> {

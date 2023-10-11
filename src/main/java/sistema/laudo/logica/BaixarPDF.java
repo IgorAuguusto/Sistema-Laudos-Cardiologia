@@ -19,10 +19,10 @@ public class BaixarPDF implements Logica {
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String pacienteCpf = request.getParameter("exameCpf");
-		
+		String tipoExame = request.getParameter("tipoExame");
 		
 		try {
-			Exame exame = ExameDao.procurarExame(pacienteCpf);
+			Exame exame = ExameDao.procurarExame(pacienteCpf, tipoExame);
 			
 			if (exame != null) {
 				ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(exame.getPdf());

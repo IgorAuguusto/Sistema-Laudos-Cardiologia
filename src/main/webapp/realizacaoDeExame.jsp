@@ -47,6 +47,7 @@
 							<form method="post"
 								action="Controller">
 								<input type="hidden" value="RealizarExame" name="logica">
+								<input type="hidden" name="tipoExame" value="${exame.tipoExame}" /> 
 								<input type="hidden" name="examePacienteCpf" value="${exame.pacienteCpf}" /> 
 								<input type="submit" value="Realizar Exame"/>
 							</form>

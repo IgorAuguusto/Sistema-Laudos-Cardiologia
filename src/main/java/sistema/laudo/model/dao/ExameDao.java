@@ -67,7 +67,84 @@ public class ExameDao {
 				}
 			}
 		} catch (SQLException e) {
-			throw new SQLException("Erro ao procurar paciente", e);
+			throw new SQLException("Erro ao procurar exame", e);
+		}
+	}//procurarExame()
+	
+	public static Exame procurarExame(String cpf, String tipoExame) throws SQLException {
+		try (Connection connection = FabricaConexao.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM exames WHERE paciente_cpf = ? AND exame = ?")) {
+
+			preparedStatement.setString(1, cpf);
+			preparedStatement.setString(2, tipoExame);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					Exame exame = new Exame();
+					
+					exame.setId(resultSet.getInt("id"));
+					exame.setPacienteCpf(resultSet.getString("paciente_cpf"));
+					exame.setTipoExame(resultSet.getString("exame"));
+					exame.setStatus(resultSet.getString("status"));
+					exame.setHipotese(resultSet.getString("hipotese"));
+					exame.setDataPedido(resultSet.getTimestamp("data_pedido").toLocalDateTime());
+					exame.setMedicoCrm(resultSet.getString("crm"));
+					exame.setNomeMedico(resultSet.getString("nome_medico"));
+					
+					if (resultSet.getBytes("pdf") != null) {
+						exame.setPdf(resultSet.getBytes("pdf"));
+					}
+					if (resultSet.getTimestamp("data_realizacao") != null) {
+						exame.setDataRealizacao(resultSet.getTimestamp("data_realizacao").toLocalDateTime());
+					}
+					
+					return exame;
+
+				} else {
+					return null;
+				}
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao procurar exame", e);
+		}
+	}//procurarExame()
+	
+	public static Exame procurarExame(int id) throws SQLException {
+		try (Connection connection = FabricaConexao.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM exames WHERE id = ?")) {
+
+			preparedStatement.setInt(1, id);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					Exame exame = new Exame();
+					
+					exame.setId(resultSet.getInt("id"));
+					exame.setPacienteCpf(resultSet.getString("paciente_cpf"));
+					exame.setTipoExame(resultSet.getString("exame"));
+					exame.setStatus(resultSet.getString("status"));
+					exame.setHipotese(resultSet.getString("hipotese"));
+					exame.setDataPedido(resultSet.getTimestamp("data_pedido").toLocalDateTime());
+					exame.setMedicoCrm(resultSet.getString("crm"));
+					exame.setNomeMedico(resultSet.getString("nome_medico"));
+					
+					if (resultSet.getBytes("pdf") != null) {
+						exame.setPdf(resultSet.getBytes("pdf"));
+					}
+					if (resultSet.getTimestamp("data_realizacao") != null) {
+						exame.setDataRealizacao(resultSet.getTimestamp("data_realizacao").toLocalDateTime());
+					}
+					
+					return exame;
+
+				} else {
+					return null;
+				}
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao procurar exame", e);
 		}
 	}//procurarExame()
 	

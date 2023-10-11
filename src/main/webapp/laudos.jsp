@@ -50,6 +50,7 @@
 							<td>
 								<form method="post" action="Controller" target="_blank">
 									<input type="hidden" name="exameCpf" value="${exame.pacienteCpf}" /> 
+									<input type="hidden" name="tipoExame" value="${exame.tipoExame}" /> 
 									<input type="hidden" value="BaixarPDF" name="logica" />
 									<input class="gerar_pdf_button" type="submit" value="Visualizar PDF" name="logica" />
 									

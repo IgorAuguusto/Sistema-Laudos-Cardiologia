@@ -31,10 +31,6 @@ body{
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
 
-.consulta {
-	height: 370px;
-}
-
 .center_geraLaudo {
   height: 620px;
   width: 600px;
@@ -113,9 +109,18 @@ input[type="submit"]{
   outline: none;
 }
 
+input.gerar_pdf_button[type="submit"] {
+	background-color: #dd6262;
+}
+
 input[type="submit"]:hover{
   border-color: #2691d9;
   transition: .5s;
+}
+
+input.gerar_pdf_button[type="submit"]:hover {
+  background-color: #cd5c5c;
+  border-color: #cd5c5c;
 }
 
 input.save{
@@ -141,6 +146,10 @@ input.save[type="submit"]:hover {
     margin-bottom: 0.7em;
     background-color: white;
     border-radius: 0.4em;
+}
+
+.descricao {
+	height: 12vh;
 }
 
 .error_mensagem {

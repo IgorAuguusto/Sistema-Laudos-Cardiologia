@@ -21,7 +21,7 @@ public class RealizarExame implements Logica {
 		try {
 			
 			String pacienteCpf = request.getParameter("examePacienteCpf").trim();
-			Exame exame = ExameDao.procurarExame(pacienteCpf);
+			Exame exame = ExameDao.procurarExame(pacienteCpf, request.getParameter("tipoExame"));
 			HttpSession session = request.getSession(false);
 			Medico medico = (Medico) session.getAttribute("medico");		
 			

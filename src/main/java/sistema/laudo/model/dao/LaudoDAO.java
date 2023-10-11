@@ -14,91 +14,119 @@ import sistema.laudo.model.entities.StatusLaudo;
 
 public class LaudoDAO {
 
-    public static void inserirLaudo(Laudo laudo) throws SQLException {
-        try (Connection connection = FabricaConexao.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO laudos (exame_id, crm, descricao, conclusao, status) VALUES (?, ?, ?, ?, ?)")) {
+	public static void inserirLaudo(Laudo laudo) throws SQLException {
+		try (Connection connection = FabricaConexao.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"INSERT INTO laudos (exame_id, crm, descricao, conclusao, status) VALUES (?, ?, ?, ?, ?)")) {
 
-            preparedStatement.setInt(1, laudo.getExameId());
-            preparedStatement.setString(2, laudo.getCrm());
-            preparedStatement.setString(3, laudo.getDescricao());
-            preparedStatement.setString(4, laudo.getConclusao());
-            preparedStatement.setString(5, laudo.getStatusStr());
+			preparedStatement.setInt(1, laudo.getExameId());
+			preparedStatement.setString(2, laudo.getCrm());
+			preparedStatement.setString(3, laudo.getDescricao());
+			preparedStatement.setString(4, laudo.getConclusao());
+			preparedStatement.setString(5, laudo.getStatusStr());
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao inserir laudo", e);
-        }
-    }//inserirLaudo()
-    
-    public static Laudo procurarLaudo(int laudoId) throws SQLException {
-        Laudo laudo = null;
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao inserir laudo", e);
+		}
+	}// inserirLaudo()
 
-        try (Connection connection = FabricaConexao.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM laudos WHERE id = ?")) {
+	public static Laudo procurarLaudo(int laudoId) throws SQLException {
+		Laudo laudo = null;
 
-            preparedStatement.setInt(1, laudoId);
+		try (Connection connection = FabricaConexao.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM laudos WHERE id = ?")) {
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement.setInt(1, laudoId);
 
-            if (resultSet.next()) {
-                laudo = new Laudo();
-                laudo.setId(resultSet.getInt("id"));
-                laudo.setExameId(resultSet.getInt("exame_id"));
-                laudo.setCrm(resultSet.getString("crm"));
-                laudo.setDescricao(resultSet.getString("descricao"));
-                laudo.setConclusao(resultSet.getString("conclusao"));
-                laudo.setStatus(StatusLaudo.converterStringParaStatusLaudo(resultSet.getString("status")));
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao procurar o laudo por ID", e);
-        }
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-        return laudo;
-    }//procurarLaudo()
-    
-    public static List<Laudo> pesquisarTodosLaudos() throws SQLException {
-        List<Laudo> laudos = new ArrayList<>();
+			if (resultSet.next()) {
+				laudo = new Laudo();
+				laudo.setId(resultSet.getInt("id"));
+				laudo.setExameId(resultSet.getInt("exame_id"));
+				laudo.setCrm(resultSet.getString("crm"));
+				laudo.setDescricao(resultSet.getString("descricao"));
+				laudo.setConclusao(resultSet.getString("conclusao"));
+				laudo.setStatus(StatusLaudo.converterStringParaStatusLaudo(resultSet.getString("status")));
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao procurar o laudo por ID", e);
+		}
 
-        try (Connection connection = FabricaConexao.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM laudos")) {
+		return laudo;
+	}// procurarLaudo()
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+	public static Laudo procurarLaudoPorExameId(int exameId) throws SQLException {
+	    Laudo laudo = null;
 
-            while (resultSet.next()) {
-                Laudo laudo = new Laudo();
-                laudo.setId(resultSet.getInt("id"));
-                laudo.setExameId(resultSet.getInt("exame_id"));
-                laudo.setCrm(resultSet.getString("crm"));
-                laudo.setDescricao(resultSet.getString("descricao"));
-                laudo.setConclusao(resultSet.getString("conclusao"));
-                laudo.setStatus(StatusLaudo.converterStringParaStatusLaudo(resultSet.getString("status")));
+	    try (Connection connection = FabricaConexao.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM laudos WHERE exame_id = ?")) {
 
-                laudos.add(laudo);
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao pesquisar todos os laudos", e);
-        }
+	        preparedStatement.setInt(1, exameId);  
+	        ResultSet resultSet = preparedStatement.executeQuery();
 
-        return laudos;
-    }//pesquisarTodosLaudos()
-    
-    public static void atualizarLaudo(Laudo laudo) throws SQLException {
-        try (Connection connection = FabricaConexao.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(
-                        "UPDATE laudos SET exame_id = ?, crm = ?, descricao = ?, conclusao = ?, status = ? WHERE id = ?")) {
+	        if (resultSet.next()) {
+	            laudo = new Laudo();
+	            laudo.setId(resultSet.getInt("id"));
+	            laudo.setExameId(resultSet.getInt("exame_id"));
+	            laudo.setCrm(resultSet.getString("crm"));
+	            laudo.setDescricao(resultSet.getString("descricao"));
+	            laudo.setConclusao(resultSet.getString("conclusao"));
+	            laudo.setStatus(StatusLaudo.converterStringParaStatusLaudo(resultSet.getString("status")));
+	        }
+	    } catch (SQLException e) {
+	        throw new SQLException("Erro ao procurar o laudo pelo ID do exame", e);
+	    }
 
-            preparedStatement.setInt(1, laudo.getExameId());
-            preparedStatement.setString(2, laudo.getCrm());
-            preparedStatement.setString(3, laudo.getDescricao());
-            preparedStatement.setString(4, laudo.getConclusao());
-            preparedStatement.setString(5, laudo.getStatusStr());
-            preparedStatement.setInt(6, laudo.getId()); 
+	    return laudo;
+	
+	}//procurarLaudoPorExameId()
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao atualizar laudo", e);
-        }
-    }//atualizarLaudo()
 
-}//LaudoDAO
+	public static List<Laudo> pesquisarTodosLaudos() throws SQLException {
+		List<Laudo> laudos = new ArrayList<>();
+
+		try (Connection connection = FabricaConexao.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM laudos")) {
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Laudo laudo = new Laudo();
+				laudo.setId(resultSet.getInt("id"));
+				laudo.setExameId(resultSet.getInt("exame_id"));
+				laudo.setCrm(resultSet.getString("crm"));
+				laudo.setDescricao(resultSet.getString("descricao"));
+				laudo.setConclusao(resultSet.getString("conclusao"));
+				laudo.setStatus(StatusLaudo.converterStringParaStatusLaudo(resultSet.getString("status")));
+
+				laudos.add(laudo);
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao pesquisar todos os laudos", e);
+		}
+
+		return laudos;
+	}// pesquisarTodosLaudos()
+
+	public static void atualizarLaudo(Laudo laudo) throws SQLException {
+		try (Connection connection = FabricaConexao.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"UPDATE laudos SET exame_id = ?, crm = ?, descricao = ?, conclusao = ?, status = ? WHERE id = ?")) {
+
+			preparedStatement.setInt(1, laudo.getExameId());
+			preparedStatement.setString(2, laudo.getCrm());
+			preparedStatement.setString(3, laudo.getDescricao());
+			preparedStatement.setString(4, laudo.getConclusao());
+			preparedStatement.setString(5, laudo.getStatusStr());
+			preparedStatement.setInt(6, laudo.getId());
+
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao atualizar laudo", e);
+		}
+	}// atualizarLaudo()
+
+}// LaudoDAO

@@ -14,15 +14,21 @@
 		<form method="post" action="Controller"> 
 		<input type="hidden" value="Consulta" name="logica">
 			<div class="txt_field">
-				<input type="text" name="paciente" required> <span></span> 
+				<input type="text" name="cpf" required> <span></span> 
 				<label>Informe o CPF do paciente</label>
 			</div>
 			
-			<input type="submit" value="Solicitar exame">
+			<input type="submit" value="Pesquisar">
 			
 			<div class="button-link-div">
 				<a href="paginaPrincipal.jsp" class="button-link">Voltar</a>
 			</div>
+			
+			<c:if test="${not empty requestScope.cpfInvalido}">
+	        	<div class="container_alert">
+	        		<p class="error_mensagem"><strong>CPF Inválido</strong></p>
+	        	</div>
+        	</c:if>
 		</form>
 	</div>
 </body>

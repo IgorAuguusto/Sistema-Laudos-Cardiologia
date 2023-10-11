@@ -51,7 +51,7 @@ public class GeradorPDF {
 
 	    String contextoPath = context.getRealPath("/");
 	    
-	    String caminhoAbsolutoImagens = String.format("%s%S",  contextoPath, caminhoRelativoImagens);
+	    String caminhoAbsolutoImagens = String.format("%s%s",  contextoPath, caminhoRelativoImagens);
 	    
 	    ImageData imageData;
 		try {
