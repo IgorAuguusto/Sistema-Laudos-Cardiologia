@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="autenticacaoMedico.jsp"%>
+<%@ include file="autenticacao.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="styleSolicitacaoExame.css">
 </head>
 <body>
+	<c:import url="cabecalho.jsp" />
 	<div class="center consulta">
 		<h1>Consulta</h1>
 		<form method="post" action="Controller"> 

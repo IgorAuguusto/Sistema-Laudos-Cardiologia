@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="styleRealizacaoExame.css">
 </head>
 <body>
+	<c:import url="cabecalho.jsp" />
 	<c:set var="laudoList" value="${LaudoDAO.pesquisarTodosLaudos()}" />
 	
 	<c:set var="laudoListFiltrada" value="${laudoList.stream().filter(l -> l.getStatusStr().equals(StatusLaudo.PROVISORIO.getStatusLaudo())).toList()}" />

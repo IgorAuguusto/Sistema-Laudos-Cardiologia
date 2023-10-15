@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+	<c:import url="cabecalho.jsp" />
 	<div class="center center_geraLaudo">
 		<h1>Laudo</h1>
 		<form method="post" action="Controller">

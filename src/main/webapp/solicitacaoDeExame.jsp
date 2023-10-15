@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="styleSolicitacaoExame.css">
 </head>
 <body>
+	<c:import url="cabecalho.jsp" />
 	<div class="center">
 		<h1>Solicitar Exame</h1>
 		<form method="post" action="Controller">

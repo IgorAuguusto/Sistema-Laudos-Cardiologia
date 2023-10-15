@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="stylePaginaPrincipal.css">
 </head>
 <body>
+	 <c:import url="cabecalho.jsp" />
 	 <div class="center">
 	        <h1>Sistema de Laudos</h1>
 	        <c:choose>
@@ -44,15 +45,11 @@
 	                <div class="button-link-div">
 	                	<a href="solicitacaoDeExame.jsp" class="button-link">Solicitação de Exame</a>
 	                </div>
-	                <div class="button-link-div">
-	                <a href="consulta.jsp" class="button-link">Consulta</a>
-	                </div>
 	            </c:otherwise>
 	        </c:choose>
-	        <form  method="post" action="Controller">
-	        	<input type="hidden" value="Logout" name="logica">
-	        	<input id="logout" type="submit" value="Sair">
-	        </form>
+	       <div class="button-link-div">
+	           <a href="consulta.jsp" class="button-link">Consulta</a>
+	       </div>
 	  </div>
 </body>
 </html>
