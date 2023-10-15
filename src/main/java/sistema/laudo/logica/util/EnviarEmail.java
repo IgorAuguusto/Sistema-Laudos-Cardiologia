@@ -67,7 +67,7 @@ public class EnviarEmail {
 		 sb.append("Bom dia, ").append(paciente.getNome()).append("!\n\nSua consulta com o doutor ")
 		 .append(medico.getNome()).append(", CRM: ").append(medico.getCrm()).append(", que estava agendada")
 		 .append(" para o dia: ").append(exame.getDataPedidoStr())
-		 .append(", foi cancelada").append("\n\n").append("Dados do exame..\n\n")
+		 .append(", foi cancelada.").append("\n\n").append("Dados do exame..\n\n")
 		 .append("Exame: ").append(exame.getTipoExame()).append("\n")
 		 .append("Hipótese: ").append(exame.getHipotese()).append("\n\nAtenciosamente, ").append("Hospital dos Loucos.");
 		 

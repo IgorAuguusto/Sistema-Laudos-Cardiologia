@@ -17,42 +17,51 @@
 	<c:set var="laudoList" value="${LaudoDAO.pesquisarTodosLaudos()}" />
 	
 	<c:set var="laudoListFiltrada" value="${laudoList.stream().filter(l -> l.getStatusStr().equals(StatusLaudo.PROVISORIO.getStatusLaudo())).toList()}" />
-	
-	<div id="conteiner-principal">
-		<table border="1">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>ID Exame</th>
-					<th>Médico CRM</th>
-					<th>Conclusao</th>
-					<th>Status</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="laudo" items="${laudoListFiltrada}">
+	<c:if test="${not empty laudoListFiltrada}">
+		<div id="conteiner-principal">
+			<table border="1">
+				<thead>
 					<tr>
-						<td>${laudo.id}</td>
-						<td>${laudo.exameId}</td>
-						<td>${laudo.crm}</td>
-						<td>${laudo.conclusao}</td>
-						<td>${laudo.getStatusStr()}</td>
-						<td>
-							<form method="post" action="Controller">
-								<input type="hidden" value="RevisarLaudo" name="logica">
-								<input type="hidden" name="laudoId" value="${laudo.id}" /> 
-								<input type="submit" value="Revisar Laudo"/>
-							</form>
-						</td>
+						<th>ID</th>
+						<th>ID Exame</th>
+						<th>Médico CRM</th>
+						<th>Conclusao</th>
+						<th>Status</th>
+						<th></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<div class="button-link-div">
-			<a href="paginaPrincipal.jsp" class="button-link">Voltar</a>
+				</thead>
+				<tbody>
+					<c:forEach var="laudo" items="${laudoListFiltrada}">
+						<tr>
+							<td>${laudo.id}</td>
+							<td>${laudo.exameId}</td>
+							<td>${laudo.crm}</td>
+							<td>${laudo.conclusao}</td>
+							<td>${laudo.getStatusStr()}</td>
+							<td>
+								<form method="post" action="Controller">
+									<input type="hidden" value="RevisarLaudo" name="logica">
+									<input type="hidden" name="laudoId" value="${laudo.id}" /> 
+									<input type="submit" value="Revisar Laudo"/>
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div class="button-link-div">
+				<a href="paginaPrincipal.jsp" class="button-link">Voltar</a>
+			</div>
 		</div>
-	</div>
+	</c:if>
 	
+	<c:if test="${empty laudoListFiltrada}">
+		<div class="center">
+			<h1>Não há Laudos cadastrados</h1>
+			<div class="button-link-div">
+				<a href="paginaPrincipal.jsp" class="button-link">Voltar</a>
+			</div>
+		</div>
+	</c:if>
 </body>
 </html>

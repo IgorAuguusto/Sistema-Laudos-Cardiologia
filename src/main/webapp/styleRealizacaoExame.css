@@ -17,7 +17,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   height: 100vh;
-  overflow: hidden;
+  background-color: #22566c;
   align-items: center;
   justify-content: center;
 }

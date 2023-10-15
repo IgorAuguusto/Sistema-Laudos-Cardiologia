@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,13 +37,16 @@ public class Login implements Logica {
 				sessao.setAttribute("medico", medico);
 				List<Exame> exameCanceladosList = examesCancelados();
 				exameCanceladosList.forEach((e) -> {
-					try {
-						EnviarEmail.enviarEmail(PacienteDAO.procurarPaciente(e.getPacienteCpf()).geteMail(),
-								"Exame Cancelado", EnviarEmail.montarMensagemCancelamento(
-										PacienteDAO.procurarPaciente(e.getPacienteCpf()), medico, e));
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
+					ExecutorService executor = Executors.newSingleThreadExecutor();
+					executor.submit(() -> {
+						try {
+							EnviarEmail.enviarEmail(PacienteDAO.procurarPaciente(e.getPacienteCpf()).geteMail(),
+									"Exame Cancelado", EnviarEmail.montarMensagemCancelamento(
+											PacienteDAO.procurarPaciente(e.getPacienteCpf()), medico, e));
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+					});
 				});
 				return "paginaPrincipal.jsp";
 
@@ -51,7 +56,6 @@ public class Login implements Logica {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// url = "erro.jsp";
 		}
 
 		return url;
@@ -60,7 +64,7 @@ public class Login implements Logica {
 	private List<Exame> examesCancelados() throws SQLException {
 		List<Exame> exameList = ExameDao.pesquisarTodosExames();
 		LocalDateTime dataAtual = LocalDateTime.now();
-		exameList = exameList.stream().filter((e) -> e.getDataPedido().isBefore(dataAtual)).toList();
+		exameList = exameList.stream().filter((e) -> dataAtual.isAfter(e.getDataPedido())).toList();
 		exameList = exameList.stream().filter((e) -> e.getStatus().equals(StatusExame.AGUARDANDO_EXAME)).toList();
 		exameList.forEach((e) -> e.setStatus(StatusExame.EXAME_CANCELADO.getStatusExame()));
 		exameList.forEach((e) -> {

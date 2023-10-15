@@ -83,7 +83,7 @@
 	
 	<c:if test="${empty exameListFiltrada}">
 		<div class="center">
-			<h1>Não há Laudos cadastrados</h1>
+			<h1>Não há exames cadastrados</h1>
 			<div class="button-link-div">
 				<a href="paginaPrincipal.jsp" class="button-link">Voltar</a>
 			</div>

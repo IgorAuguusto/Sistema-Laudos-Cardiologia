@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,7 +60,11 @@ public class SolicitaExame implements Logica {
 			
 			String mensagemEmail = EnviarEmail.montarMensagemEmail(paciente, medico, exame);
 			String assunto = "Consulta marcada";
-			EnviarEmail.enviarEmail(paciente.geteMail(), assunto, mensagemEmail);
+			
+			ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(() -> {
+            	EnviarEmail.enviarEmail(paciente.geteMail(), assunto, mensagemEmail);
+            });
 			
 			request.setAttribute("consultaMarcada", true);
 			
